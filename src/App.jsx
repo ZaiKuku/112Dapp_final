@@ -6,7 +6,7 @@ function App() {
   
   return (
     <div>
-      <span className="e2_3">NFT CRAFTOR</span>
+      <span className="NFTCRAFTOR">NFT CRAFTOR</span>
       <MetamaskBlock />
     </div >)
 }
