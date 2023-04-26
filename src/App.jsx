@@ -18,7 +18,7 @@ function App() {
   return (
     <body>
       <span class="e2_3">NFT CRAFTOR</span>
-      <button onClick={handleGetAddress} class="e2_5"></button> 
+      <button onClick={handleGetAddress} class="e2_5"></button>
     </body >)
 }
 
