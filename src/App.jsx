@@ -1,13 +1,12 @@
 import './App.css'
-import MetamaskBlock from './components/metamaskblock'
+import Startpage from './pages/Startpage'
 
 
 function App() {
   
   return (
     <div>
-      <span className="NFTCRAFTOR">NFT CRAFTOR</span>
-      <MetamaskBlock />
+        <Startpage />
     </div >)
 }
 

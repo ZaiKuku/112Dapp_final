@@ -1,10 +1,11 @@
   .METAMASK{
-    width: 99px;
-    height: 99px;
-    position: absolute;
-    left: 670px;
-    top: 350px;
-    background-image: url(../images/metamask.png);
-    background-repeat: no-repeat;
-    background-size: cover;
+    width:75px;
+    height:75px;
+    position:absolute;
+    left:1250px;
+    top:27px;
+    background-image:url(../images/metamask_fox_1.png);
+    background-repeat:no-repeat;
+    background-size:cover;
   }
+
