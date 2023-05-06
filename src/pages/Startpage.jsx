@@ -2,6 +2,8 @@ import MetamaskBlock from '../components/metamaskblock'
 import StartButton from '../components/StartButton/StartButton'
 import './Startpage.css'
 
+import React from 'react'
+
 
 function Startpage() {
 
