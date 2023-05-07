@@ -1,4 +1,4 @@
-import MetamaskBlock from '../components/metamaskblock'
+import MetamaskBlock from '../components/metamaskblock/metamaskblock'
 import StartButton from '../components/StartButton/StartButton'
 import './Startpage.css'
 
