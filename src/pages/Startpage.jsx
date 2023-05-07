@@ -1,7 +1,6 @@
-import MetamaskBlock from '../components/metamaskblock'
+import MetamaskBlock from '../components/metamaskblock/metamaskblock'
 import StartButton from '../components/StartButton/StartButton'
 import './Startpage.css'
-
 import React from 'react'
 
 
@@ -14,7 +13,6 @@ function Startpage() {
                 <MetamaskBlock />
                 <div class="e4_48"></div>
                 <div class="e4_50"></div>
-
             </div>
             <StartButton />
         </div >)

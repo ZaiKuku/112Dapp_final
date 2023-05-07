@@ -1,37 +1,37 @@
 import './metamaskblock.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { get_account, select_account } from '../accounts/accountSlice'
+import { get_account, select_account } from '../../accounts/accountSlice'
+import store from '../../accounts/stores'
 import { useState } from 'react'
+
 
 
 const MetamaskBlock = () => {
     // const account = useSelector(state => state.account)
     const [connectedToMetamask, setConnectedToMetamask] = useState(false);
-    const account = useSelector(select_account)
+    
     const dispatch = useDispatch()
-
-    const handleGetAddress = async () => {
-        if (typeof window.ethereum !== "undefined") {
-            const loaded_account = await window.ethereum.request({
-                method: "eth_requestAccounts",
-            });
-            
-            const sendData = {
-                account: loaded_account[0]
-            }
-            dispatch(get_account(sendData))
-            
-
-        }
-
-    }
+    const account = useSelector(select_account)
 
     const connectToMetamask = async () => {
+        
         if (window.ethereum) { // check if Metamask is installed
           try {
-            await window.ethereum.request({ method: 'eth_accounts' }); // check if Metamask is connected to a network
+            if (typeof window.ethereum !== "undefined") {
+              const loaded_account = await window.ethereum.request({
+                  method: "eth_requestAccounts",
+              });
+              
+              const sendData = {
+                  account: loaded_account[0]
+              }
+              console.log(loaded_account);
+              
+              dispatch(get_account(sendData))
+            }
             setConnectedToMetamask(true); // set connectedToMetamask state to true
-            handleGetAddress;
+            
+  
           } catch (error) {
             console.log(error);
           }
