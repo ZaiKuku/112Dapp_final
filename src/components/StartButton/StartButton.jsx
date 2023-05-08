@@ -16,8 +16,8 @@ const StartButton = () => {
 
     return (
         <div>
-            {!clicked && <button onClick={handleclick}><div id='rectangle' class='rectangle'></div><div id='start' class='start'>Start</div></button>}
-            {clicked && <button onClick={handleclick_new}><div id='rectangle' class='rectangle'></div><div id='start' class='start'>New</div></button>}
+            {!clicked && <button onClick={handleclick}><div id='rectangle' class='rect'></div><div id='start' class='start'>Start</div></button>}
+            {clicked && <button onClick={handleclick_new}><div id='rectangle' class='rect'></div><div id='start' class='start'>New</div></button>}
         </div>
     );
 };
