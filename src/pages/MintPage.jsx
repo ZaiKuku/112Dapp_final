@@ -1,12 +1,17 @@
 import Background from '../components/Background/Background'
+import MintButton from '../components/MintButton/MintButton'
 import './MintPage.css'
+
 
 const MintPage = () => {
     return (
         <div>
             <Background />
-            <span class="mint">Mint</span>
-            <span class="MysteryBox">Open Mystery Box</span>
+            <span className="mint">Mint</span>
+            <MintButton />
+            <span className="MysteryBox">Open Mystery Box</span>
+            <div className="box"/>
+            <div className='UFO'/>
         </div>)
 
 }
