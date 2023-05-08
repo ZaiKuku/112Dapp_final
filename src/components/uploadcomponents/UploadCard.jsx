@@ -9,8 +9,10 @@ export const UploadCard = (props) => {
     reader.onload = function () {
       setFileSrc(reader.result);
     };
-    reader?.readAsDataURL(e?.target?.files[0]);
+    reader.readAsDataURL(e.target.files[0]);
+    console.log(e.target.files[0]); 
     e.target.value = "";
+    
   };
   const handleClear = (e) => {
     e.preventDefault();

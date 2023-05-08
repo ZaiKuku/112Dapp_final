@@ -1,6 +1,7 @@
 
 .UploadCard{
-    background-color: #fff;
+    background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 0.30000001192092896);
+    border: solid 1px black;
     padding: 10px;
     width: 100%;
     max-width: 400px;
