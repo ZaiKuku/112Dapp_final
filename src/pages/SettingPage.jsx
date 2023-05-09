@@ -1,6 +1,7 @@
 import Background from '../components/Background/Background'
 import ProjectForm from '../components/ProjectForm/ProjectForm'
 import './SettingPage.css'
+import { UploadCard } from '../components/uploadcomponents/UploadCard'
 
 
 function SettingPage() {
@@ -16,8 +17,9 @@ function SettingPage() {
             </select>
             <ProjectForm />
             <div class="e4_108">
-                <div class="e4_101"></div>
-                <div class="e4_105"></div>
+                <UploadCard/>
+                {/* <div class="e4_101"></div>
+                <div class="e4_105"></div> */}
             </div>
 
         </div>

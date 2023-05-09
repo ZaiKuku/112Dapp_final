@@ -1,6 +1,6 @@
 import React from "react";
 import './ProjectForm.css'
-
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {
     updateProjectName,
@@ -12,6 +12,7 @@ import {
 } from '../../States/Projects/ProjectFormSlice';
 
 const ProjectForm = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,9 +33,11 @@ const ProjectForm = () => {
         dispatch(updateTraitsType(data.traitsType));
         dispatch(updateValue(data.value));
         dispatch(updateDescription(data.description));
+
+        navigate('/')
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
             <div className="e5_113">
                 <input required className="e4_92" name="projectName" placeholder="NFT Project Name" />
             </div>

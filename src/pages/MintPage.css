@@ -1,0 +1,49 @@
+.mint {
+	color: rgba(0, 0, 0, 1);
+	width: 551px;
+	height: 189px;
+	position: absolute;
+	left: 420px;
+	top: 325px;
+	font-family: Aldrich;
+	text-align: left;
+	font-size: 42px;
+	letter-spacing: 0;
+	line-height: px;
+}
+
+.MysteryBox {
+	color: rgba(0, 0, 0, 1);
+	width: 551px;
+	height: 189px;
+	position: absolute;
+	left: 875px;
+	top: 325px;
+	font-family: Aldrich;
+	text-align: left;
+	font-size: 42px;
+	letter-spacing: 0;
+	line-height: px;
+}
+
+.box{
+	width:219px;
+	height:219px;
+	position:absolute;
+	left:934px;
+	top:473px;
+	background-image:url(../images/box.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+.UFO{
+	width:60px;
+	height:60px;
+	position:absolute;
+	left:970px;
+	top:600px;
+	background-image:url(../images/image_2.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+}

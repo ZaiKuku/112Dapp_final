@@ -1,0 +1,75 @@
+.formstyle {
+    background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 0.30000001192092896);
+    width: 510px;
+    height: 303px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 28px;
+    vertical-align: text-top;
+    resize: none;
+}
+
+.pos {
+    position: absolute;
+    left: 210px;
+    top: 400px;
+}
+
+.rectangle {
+    background-color: #f5d532;
+    height: 89px;
+    width: 187px;
+    border-radius: 20px;
+    position: absolute;
+    top: 786px;
+    left: 380px;
+}
+
+.rectangle2 {
+    background-color: #f5d532;
+    height: 89px;
+    width: 187px;
+    border-radius: 20px;
+    position: absolute;
+    top: 786px;
+    left: 950px;
+}
+
+.Mint {
+    color: #363636;
+    text-align: center;
+    vertical-align: text-middle;
+    font-size: 48px;
+    font-family: Inter;
+    line-height: 40px;
+    border-style: hidden;
+    outline: none;
+    width: 187px;
+    align-self: center;
+    display: flex;
+    position: absolute;
+    top: 810px;
+    left: 420px;
+}
+
+.Open {
+    color: #363636;
+    text-align: center;
+    vertical-align: text-middle;
+    font-size: 48px;
+    font-family: Inter;
+    line-height: 40px;
+    border-style: hidden;
+    outline: none;
+    width: 187px;
+    align-self: center;
+    display: flex;
+    position: absolute;
+    top: 810px;
+    left: 980px;
+}
