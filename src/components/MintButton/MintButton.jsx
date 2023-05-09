@@ -1,8 +1,13 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import './MintButton.css'
 
 
 const MintButton = () => {
+    const navigate = useNavigate();
+    const handleclick = () => {
+        navigate('/FinalPage')
+    }
 
     return (
         <div>
