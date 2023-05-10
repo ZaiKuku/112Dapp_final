@@ -1,14 +1,10 @@
-.rect {
+.start {
     background-color: #f5d532;
     height: 89px;
     width: 187px;
     border-radius: 20px;
     position: absolute;
-    top: 550px;
-    left: 670px;
-}
-
-.start {
+    border: none;
     color: #363636;
     text-align: center;
     vertical-align: text-middle;
@@ -16,11 +12,13 @@
     font-family: Inter;
     line-height: 40px;
     border-style: hidden;
-    outline: none;
-    width: 187px;
-    align-self: center;
-    display: flex;
-    position: absolute;
-    top: 575px;
-    left: 705px;
+    top: 550px;
+    left: 670px;
+
+}
+
+
+
+.start:hover {
+    background-color: rgba(244.6311467885971, 215.47923266887665, 112.12260514497757, 1);
 }

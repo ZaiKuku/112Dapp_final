@@ -20,56 +20,47 @@
     top: 400px;
 }
 
-.rectangle {
-    background-color: #f5d532;
+
+.rect {
+	background-color: #f5d532;
     height: 89px;
     width: 187px;
     border-radius: 20px;
     position: absolute;
+    border: none;
+    color: #363636;
+    text-align: center;
+    vertical-align: text-middle;
+    font-size: 48px;
+    font-family: Inter;
+    line-height: 40px;
+    border-style: hidden;
     top: 786px;
     left: 380px;
 }
 
-.rectangle2 {
-    background-color: #f5d532;
+.rect:hover {
+    background-color: rgba(244.6311467885971, 215.47923266887665, 112.12260514497757, 1);
+}
+
+.rect2 {
+	background-color: #f5d532;
     height: 89px;
     width: 187px;
     border-radius: 20px;
     position: absolute;
+    border: none;
+    color: #363636;
+    text-align: center;
+    vertical-align: text-middle;
+    font-size: 48px;
+    font-family: Inter;
+    line-height: 40px;
+    border-style: hidden;
     top: 786px;
     left: 950px;
 }
 
-.Mint {
-    color: #363636;
-    text-align: center;
-    vertical-align: text-middle;
-    font-size: 48px;
-    font-family: Inter;
-    line-height: 40px;
-    border-style: hidden;
-    outline: none;
-    width: 187px;
-    align-self: center;
-    display: flex;
-    position: absolute;
-    top: 810px;
-    left: 420px;
-}
-
-.Open {
-    color: #363636;
-    text-align: center;
-    vertical-align: text-middle;
-    font-size: 48px;
-    font-family: Inter;
-    line-height: 40px;
-    border-style: hidden;
-    outline: none;
-    width: 187px;
-    align-self: center;
-    display: flex;
-    position: absolute;
-    top: 810px;
-    left: 980px;
+.rect2:hover {
+    background-color: rgba(244.6311467885971, 215.47923266887665, 112.12260514497757, 1);
 }

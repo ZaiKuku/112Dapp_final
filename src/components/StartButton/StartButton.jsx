@@ -20,10 +20,10 @@ const StartButton = () => {
 
     return (
         <div>
-            {!clicked && <button onClick={handleclick}><div id='rectangle' className='rect'></div><div id='start' className='start'>Start</div></button>}
+            {!clicked && <button onClick={handleclick} className='start'>Start</button>}
             {clicked && <>
-                <button onClick={handleclick_new}><div id='rectangle' className='rect'></div><div id='start' className='start'>New</div></button>
-                <button onClick={handleclick_old}><div id='rectangle' className='rect'></div><div id='start' className='start'>Old</div></button>
+                <button onClick={handleclick_new} className='start'>New</button>
+                <button onClick={handleclick_old} className='start'>Old</button>
             </>}
         </div>
     );

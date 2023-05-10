@@ -68,7 +68,7 @@ const ProjectForm = () => {
                 <input className="ei7_116_4_99" name="value" placeholder="value" />
             </div>
             <div class="build">
-                <button type="submit"><div id='rectangle' class='ei4_110_3_45'></div><div id='Build' class='ei4_110_3_46'>Build</div></button>
+                <button type="submit" className="ei4_110_3_46">Build</button>
             </div>
         </form>
     )
