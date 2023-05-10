@@ -13,7 +13,8 @@ function SettingPage() {
             <span class="e4_94">General</span>
             <span class="e4_100">Upload Media</span>
             <select class="e4_109">
-                <option>Attributes</option>
+                <option>boost_number</option>
+                <option>Boost_percentage</option>
             </select>
             <ProjectForm />
             <div class="e4_108">

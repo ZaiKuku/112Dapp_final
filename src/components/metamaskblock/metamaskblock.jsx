@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { get_account, select_account } from '../../States/accounts/accountSlice'
 import store from '../../States/stores'
 import { useState } from 'react'
+import { useConnect } from 'wagmi'
 
 
 
@@ -38,12 +39,11 @@ const MetamaskBlock = () => {
     } else {
       console.log('Metamask is not installed');
     }
+  
   };
 
 
-  // return (
-  //     <button onClick={connectToMetamask} className="e2_5"></button>
-  // )
+
   return (
     <div>
       {!connectedToMetamask && <button onClick={connectToMetamask} className="METAMASK"></button>}
