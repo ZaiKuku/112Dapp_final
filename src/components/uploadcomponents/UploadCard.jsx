@@ -10,7 +10,7 @@ export const UploadCard = (props) => {
       setFileSrc(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files[0]); 
+    console.log(e.target.files); 
     e.target.value = "";
     
   };

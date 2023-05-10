@@ -8,6 +8,7 @@ import FinalPage from './pages/FinalPage'
 
 import { BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom'
 
+
 const Layout = (props) => {
   return (
     <>
@@ -25,7 +26,7 @@ const Layout = (props) => {
 function App() {
 
   return (
-    <div>
+   
       <Router>
         <Layout>
         <Routes>
@@ -36,7 +37,7 @@ function App() {
         </Routes>
         </Layout>
       </Router>
-    </div>
+  
 
   )
 }

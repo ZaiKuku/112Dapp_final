@@ -34,7 +34,7 @@ const ProjectForm = () => {
         dispatch(updateValue(data.value));
         dispatch(updateDescription(data.description));
 
-        navigate('/')
+        navigate('/Mint')
     }
     return (
         <form  onSubmit={handleSubmit}>
