@@ -6,6 +6,7 @@ import SettingPage from './pages/SettingPage'
 import MintPage from './pages/MintPage'
 import FinalPage from './pages/FinalPage'
 
+
 import { BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom'
 
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/MintSetting" element={<SettingPage/>} />
             <Route path="/Mint" element={<MintPage/>} />
             <Route path="/FinalPage" element={<FinalPage/>} />
+            
         </Routes>
         </Layout>
       </Router>

@@ -9,6 +9,7 @@ import {
     updateTraitsType,
     updateValue,
     updateDescription,
+    updateNumber,
 } from '../../States/Projects/ProjectFormSlice';
 
 const ProjectForm = () => {
@@ -25,6 +26,7 @@ const ProjectForm = () => {
             traitsType: formData.get('traitsType'),
             value: formData.get('value'),
             description: formData.get('description'),
+            number: formData.get('number'),
         };
         console.log(data);
         dispatch(updateProjectName(data.projectName));
@@ -33,6 +35,7 @@ const ProjectForm = () => {
         dispatch(updateTraitsType(data.traitsType));
         dispatch(updateValue(data.value));
         dispatch(updateDescription(data.description));
+        dispatch(updateNumber(data.number));
 
         navigate('/Mint')
     }
@@ -47,16 +50,24 @@ const ProjectForm = () => {
             <div className="e5_115">
                 <input required className="e4_92" name="externalLink" placeholder="External Link" />
             </div>
-            <div className="e7_116">
-                <input className="ei7_116_4_99" name="displayType" placeholder="Display_Type" />
+
+            <div className="e5_116">
+                <input required className="e4_92" name="number of NFT" placeholder="number of NFT" />
             </div>
-            <div className="e9_119">
+
+            <div className="display">
+                <select className="ei7_116_4_99">
+                    <option>boost_number</option>
+                    <option>Boost_percentage</option>
+                </select>
+            </div>
+            <div className="traitsType">
                 <input className="ei7_116_4_99" name="traitsType" placeholder="Traits_Type" />
             </div>
-            <div className="e9_122">
+            <div className="value">
                 <input className="ei7_116_4_99" name="value" placeholder="value" />
             </div>
-            <div class="e4_110">
+            <div class="build">
                 <button type="submit"><div id='rectangle' class='ei4_110_3_45'></div><div id='Build' class='ei4_110_3_46'>Build</div></button>
             </div>
         </form>

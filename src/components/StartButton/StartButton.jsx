@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
 
 const StartButton = () => {
-    const [clicked , setclicked]= useState(false);
+    const [clicked, setclicked] = useState(false);
     const navigate = useNavigate();
+
     const handleclick = () => {
         setclicked(true)
     }
@@ -14,10 +15,16 @@ const StartButton = () => {
         navigate('/MintSetting')
     }
 
+    const handleclick_old = () => {
+    }
+
     return (
         <div>
-            {!clicked && <button onClick={handleclick}><div id='rectangle' class='rect'></div><div id='start' class='start'>Start</div></button>}
-            {clicked && <button onClick={handleclick_new}><div id='rectangle' class='rect'></div><div id='start' class='start'>New</div></button>}
+            {!clicked && <button onClick={handleclick}><div id='rectangle' className='rect'></div><div id='start' className='start'>Start</div></button>}
+            {clicked && <>
+                <button onClick={handleclick_new}><div id='rectangle' className='rect'></div><div id='start' className='start'>New</div></button>
+                <button onClick={handleclick_old}><div id='rectangle' className='rect'></div><div id='start' className='start'>Old</div></button>
+            </>}
         </div>
     );
 };

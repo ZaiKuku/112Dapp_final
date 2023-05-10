@@ -145,12 +145,14 @@
 	border: 1px solid rgba(0, 0, 0, 1);
 }
 
-.e7_116 {
+
+
+.display {
 	width: 338px;
-	height: 75px;
+	height: 85px;
 	position: absolute;
 	left: 169px;
-	top: 768px;
+	top: 940px;
 }
 
 .ei7_116_4_98 {
@@ -172,8 +174,7 @@
 	width: 338px;
 	height: 75px;
 	position: absolute;
-	left: 0px;
-	top: 20px;
+	
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	border-bottom-left-radius: 20px;
@@ -185,12 +186,13 @@
 	border: 1px solid rgba(0, 0, 0, 1);
 }
 
-.e9_119 {
+
+.traitsType {
 	width: 338px;
 	height: 75px;
 	position: absolute;
 	left: 525px;
-	top: 767px;
+	top: 940px;
 }
 
 .ei9_119_4_98 {
@@ -230,6 +232,14 @@
 	position: absolute;
 	left: 881px;
 	top: 766px;
+}
+
+.value {
+	width: 338px;
+	height: 75px;
+	position: absolute;
+	left: 881px;
+	top: 940px;
 }
 
 .ei9_122_4_98 {
@@ -338,13 +348,13 @@
 	background-size: cover;
 }
 
-.e4_110 {
+.build {
 
 	width: 187px;
 	height: 89px;
 	position: absolute;
-	left: 1108px;
-	top: 892px;
+	left: 1270px;
+	top: 940px;
 
 }
 
