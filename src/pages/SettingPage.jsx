@@ -9,19 +9,17 @@ function SettingPage() {
     return (
         <div>
             <Background />
-            <span class="e4_91">Start your NFT project</span>
-            <span class="e4_94">General</span>
-            <span class="e4_100">Upload Media</span>
-            <select class="e4_109">
-                <option>boost_number</option>
-                <option>Boost_percentage</option>
-            </select>
+            <span className="e4_91">Start your NFT project</span>
+            <span className="e4_94">General</span>
+            <span className="e4_100">NFT Picture</span>
+            
             <ProjectForm />
-            <div class="e4_108">
+            <div className="e4_108">
                 <UploadCard/>
-                {/* <div class="e4_101"></div>
-                <div class="e4_105"></div> */}
+                <span className='Mystery'>Mystery Box</span>
+                <UploadCard/>
             </div>
+            
 
         </div>
     )

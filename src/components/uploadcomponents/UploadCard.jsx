@@ -18,6 +18,7 @@ export const UploadCard = (props) => {
     e.preventDefault();
     setFileSrc(null);
   };
+
   return (
     <label className="UploadCard" {...props}>
       

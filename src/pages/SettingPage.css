@@ -56,14 +56,26 @@
 	width: 288px;
 	height: 56px;
 	position: absolute;
-	left: 790px;
-	top: 286px;
+	
 	font-family: Aldrich;
 	text-align: left;
 	font-size: 36px;
 	letter-spacing: 0;
 	line-height: px;
+	left: 790px;
+	top: 286px;
+}
 
+.Mystery{
+	color: rgba(0, 0, 0, 1);
+	width: 288px;
+	height: 56px;
+	
+	font-family: Aldrich;
+	text-align: left;
+	font-size: 36px;
+	letter-spacing: 0;
+	line-height: px;
 }
 
 .e5_113 {
@@ -112,6 +124,14 @@
 	position: absolute;
 	left: 169px;
 	top: 603px;
+}
+
+.e5_116{
+	width: 485px;
+	height: 75px;
+	position: absolute;
+	left: 169px;
+	top: 731px;
 }
 
 .e4_98 {
@@ -309,6 +329,9 @@
 	left: 790px;
 	top: 342px;
 }
+
+
+
 
 .e4_101 {
 	background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 0.30000001192092896);

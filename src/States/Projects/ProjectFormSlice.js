@@ -10,6 +10,7 @@ const formSlice = createSlice({
     traitsType: '',
     value: '',
     description: '',
+    number: '',
   },
   reducers: {
     updateProjectName: (state, action) => {
@@ -30,6 +31,9 @@ const formSlice = createSlice({
     updateDescription: (state, action) => {
       state.description = action.payload;
     },
+    updateNumber: (state, action) => {
+      state.number = action.payload;
+    }
   },
 });
 
@@ -40,6 +44,7 @@ export const {
   updateTraitsType,
   updateValue,
   updateDescription,
+  updateNumber,
 } = formSlice.actions;
 
 export default formSlice.reducer;
