@@ -5,16 +5,26 @@ import { useDispatch } from 'react-redux';
 import {
     updateProjectName,
     updateExternalLink,
-    updateDisplayType,
-    updateTraitsType,
-    updateValue,
+    updateBoostNumber,
+    updateBoostPercentage,
+    updateString,
+    updateDate,
     updateDescription,
     updateNumber,
 } from '../../States/Projects/ProjectFormSlice';
+import store from "../../States/stores";
+import { useState } from "react";
+
+
+
 
 const ProjectForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [temp_T, setTraitsType] = useState('Traits_Type');
+    const [temp_v, setValue] = useState('value');
+    const [displayType, setDisplayType] = useState('string');
+    const [isDate, setIsDate] = useState(false);
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -23,24 +33,81 @@ const ProjectForm = () => {
             projectName: formData.get('projectName'),
             externalLink: formData.get('externalLink'),
             displayType: formData.get('displayType'),
-            traitsType: formData.get('traitsType'),
-            value: formData.get('value'),
+            
             description: formData.get('description'),
             number: formData.get('number'),
         };
         console.log(data);
         dispatch(updateProjectName(data.projectName));
         dispatch(updateExternalLink(data.externalLink));
-        dispatch(updateDisplayType(data.displayType));
-        dispatch(updateTraitsType(data.traitsType));
-        dispatch(updateValue(data.value));
+
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
 
+        const traitsData = {
+            traitsType: formData.get('traitsType'),
+            value: formData.get('value'),
+        }
+        switch (displayType) {
+            case 'string':
+                dispatch(updateString(data));
+                break;
+            case 'boost_number':
+                dispatch(updateBoostNumber(data));
+                break;
+            case 'boost_percentage':
+                dispatch(updateBoostPercentage(data));
+                break;
+            case 'date':
+                dispatch(updateDate(data));
+                break;
+            default:
+                break;
+        }
         navigate('/Mint')
     }
+
+    const handleSwitch = (e) => {
+        var tt = document.getElementById("traitsType").value;
+        var v = document.getElementById("value").value;
+        const data = {
+            traitsType: tt,
+            value: v,
+        }
+        
+        // console.log(data);
+        switch (displayType) {
+            case 'string':
+                dispatch(updateString(data));
+                console.log("string");
+                break;
+            case 'boost_number':
+                dispatch(updateBoostNumber(data));
+            
+                break;
+            case 'boost_percentage':
+                dispatch(updateBoostPercentage(data));
+                
+                break;
+            case 'date':
+                dispatch(updateDate(data));
+                break;
+            default:
+                break;
+        }
+        if (e.target.value == 'date') {
+            setIsDate(true);
+        }
+        else {
+            setIsDate(false);
+        }
+        setDisplayType(e.target.value);
+        console.log(store.getState());
+        console.log(displayType);
+    }
+
     return (
-        <form  onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className="e5_113">
                 <input required className="e4_92" name="projectName" placeholder="NFT Project Name" />
             </div>
@@ -55,18 +122,23 @@ const ProjectForm = () => {
                 <input required className="e4_92" name="number of NFT" placeholder="number of NFT" />
             </div>
 
-            <div className="display">
-                <select className="ei7_116_4_99">
+            <div>
+                <select className="selcetTraits" name="displayType" onChange={handleSwitch}>
+                    <option>string</option>
                     <option>boost_number</option>
-                    <option>Boost_percentage</option>
+                    <option>boost percentage</option>
+                    <option>date</option>
                 </select>
+                <div className="traitsType">
+                    <input className="ei7_116_4_99" id="traitsType" placeholder={temp_T} />
+                </div>
+                <div className="value">
+                    {isDate && <input className="ei7_116_4_99" id="value" placeholder={temp_v} type = 'datetime'/>}
+                    {!isDate && <input className="ei7_116_4_99" id="value" placeholder={temp_v} />}
+                </div>
+
             </div>
-            <div className="traitsType">
-                <input className="ei7_116_4_99" name="traitsType" placeholder="Traits_Type" />
-            </div>
-            <div className="value">
-                <input className="ei7_116_4_99" name="value" placeholder="value" />
-            </div>
+
             <div class="build">
                 <button type="submit" className="ei4_110_3_46">Build</button>
             </div>

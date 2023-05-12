@@ -169,17 +169,18 @@
 	line-height: px;
 }
 
-.ei7_116_4_99 {
+.selcetTraits {
 	background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 0.30000001192092896);
 	width: 338px;
 	height: 75px;
 	position: absolute;
-	
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
 	font-size: 28px;
+	left: 169px;
+	top: 962px;
 }
 
 .i7_116_4_99 {
@@ -373,22 +374,22 @@
 
 .ei4_110_3_46 {
 	background-color: #f5d532;
-    height: 89px;
-    width: 187px;
-    border-radius: 20px;
-    position: absolute;
-    border: none;
-    color: #363636;
-    text-align: center;
-    vertical-align: text-middle;
-    font-size: 48px;
-    font-family: Inter;
-    line-height: 40px;
-    border-style: hidden;
+	height: 89px;
+	width: 187px;
+	border-radius: 20px;
+	position: absolute;
+	border: none;
+	color: #363636;
+	text-align: center;
+	vertical-align: text-middle;
+	font-size: 48px;
+	font-family: Inter;
+	line-height: 40px;
+	border-style: hidden;
 }
 
 .ei4_110_3_46:hover {
-    background-color: rgba(244.6311467885971, 215.47923266887665, 112.12260514497757, 1);
+	background-color: rgba(244.6311467885971, 215.47923266887665, 112.12260514497757, 1);
 }
 
 .e4_85 {

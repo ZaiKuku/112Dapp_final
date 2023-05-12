@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { get_account, select_account } from '../../States/accounts/accountSlice'
 import store from '../../States/stores'
 import { useState } from 'react'
-import { useConnect } from 'wagmi'
 
 
 
@@ -12,7 +11,9 @@ const MetamaskBlock = () => {
   const [connectedToMetamask, setConnectedToMetamask] = useState(false);
 
   const dispatch = useDispatch()
-  const account = useSelector(select_account)
+
+  const [address, setAddress] = useState('')
+  
 
   const connectToMetamask = async () => {
 
@@ -26,6 +27,8 @@ const MetamaskBlock = () => {
           const sendData = {
             account: loaded_account[0]
           }
+
+
           console.log(loaded_account);
 
           dispatch(get_account(sendData))
@@ -39,15 +42,14 @@ const MetamaskBlock = () => {
     } else {
       console.log('Metamask is not installed');
     }
-  
+    setAddress(store.getState().account.account)
+    console.log(address)
   };
-
-
 
   return (
     <div>
       {!connectedToMetamask && <button onClick={connectToMetamask} className="METAMASK"></button>}
-      {connectedToMetamask && <font color="white"> Upload your NFT </font>}
+      {connectedToMetamask && <div className='address'>{address.slice(0, 5)}...{address.slice(address.length-5, address.length-1)}</div>}
     </div>
   );
 }

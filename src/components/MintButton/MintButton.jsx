@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import './MintButton.css'
-import { useContractWrite, usePrepareContractWrite, useAccount } from 'wagmi'
 
 
 const MintButton = () => {
