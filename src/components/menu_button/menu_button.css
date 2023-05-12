@@ -24,6 +24,7 @@
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    transition-duration: 0.4s;
 }
 
 .menu:hover {
