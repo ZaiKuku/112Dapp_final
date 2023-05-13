@@ -111,8 +111,8 @@ const ProjectForm = () => {
             <div className="e5_113">
                 <input required className="e4_92" name="projectName" placeholder="NFT Project Name" />
             </div>
-            <div class="e5_114">
-                <input required class="e4_92" name="description" placeholder="Description" ></input>
+            <div className="e5_114">
+                <input required className="e4_92" name="description" placeholder="Description" ></input>
             </div>
             <div className="e5_115">
                 <input required className="e4_92" name="externalLink" placeholder="External Link" />
@@ -139,7 +139,7 @@ const ProjectForm = () => {
 
             </div>
 
-            <div class="build">
+            <div className="build">
                 <button type="submit" className="ei4_110_3_46">Build</button>
             </div>
         </form>
