@@ -9,8 +9,8 @@ function Startpage() {
     return (
         <div>
             <Background />
-            <div class="e4_50"></div>
-            <span class="e1_2">NFT Generator</span>
+            <div className="e4_50"></div>
+            <span className="e1_2">NFT Generator</span>
             <StartButton />
         </div >)
 }

@@ -37,6 +37,8 @@ const ProjectForm = () => {
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
 
+        // 部署智能合約
+
         navigate('/Mint')
     }
     return (
@@ -67,7 +69,7 @@ const ProjectForm = () => {
             <div className="value">
                 <input className="ei7_116_4_99" name="value" placeholder="value" />
             </div>
-            <div class="build">
+            <div className="build">
                 <button type="submit" className="ei4_110_3_46">Build</button>
             </div>
         </form>
