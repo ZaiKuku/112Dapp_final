@@ -35,9 +35,9 @@ const ProjectForm = () => {
             displayType: formData.get('displayType'),
             
             description: formData.get('description'),
-            number: formData.get('number'),
+            number: formData.get('number of NFT'),
         };
-        console.log(data);
+
         dispatch(updateProjectName(data.projectName));
         dispatch(updateExternalLink(data.externalLink));
 
@@ -50,21 +50,23 @@ const ProjectForm = () => {
         }
         switch (displayType) {
             case 'string':
-                dispatch(updateString(data));
+                dispatch(updateString(traitsData));
                 break;
             case 'boost_number':
-                dispatch(updateBoostNumber(data));
+                dispatch(updateBoostNumber(traitsData));
                 break;
             case 'boost_percentage':
-                dispatch(updateBoostPercentage(data));
+                dispatch(updateBoostPercentage(traitsData));
                 break;
             case 'date':
-                dispatch(updateDate(data));
+                dispatch(updateDate(traitsData));
                 break;
             default:
                 break;
         }
         navigate('/Mint')
+        console.log(typeof store.getState().projectform);
+        console.log(store.getState());
     }
 
     const handleSwitch = (e) => {
@@ -79,7 +81,7 @@ const ProjectForm = () => {
         switch (displayType) {
             case 'string':
                 dispatch(updateString(data));
-                console.log("string");
+                
                 break;
             case 'boost_number':
                 dispatch(updateBoostNumber(data));
@@ -102,8 +104,8 @@ const ProjectForm = () => {
             setIsDate(false);
         }
         setDisplayType(e.target.value);
-        console.log(store.getState());
-        console.log(displayType);
+        
+        
     }
 
     return (
@@ -119,7 +121,7 @@ const ProjectForm = () => {
             </div>
 
             <div className="e5_116">
-                <input required className="e4_92" name="number of NFT" placeholder="number of NFT" />
+                <input required type = 'number' className="e4_92" name="number of NFT" placeholder="number of NFT" />
             </div>
 
             <div>
@@ -130,10 +132,10 @@ const ProjectForm = () => {
                     <option>date</option>
                 </select>
                 <div className="traitsType">
-                    <input className="ei7_116_4_99" id="traitsType" placeholder={temp_T} />
+                    <input className="ei7_116_4_99" id="traitsType" name="traitsType" placeholder={temp_T} />
                 </div>
                 <div className="value">
-                    {isDate && <input className="ei7_116_4_99" id="value" placeholder={temp_v} type = 'datetime'/>}
+                    {isDate && <input className="ei7_116_4_99" id="value" name="value" placeholder={temp_v} type = 'datetime'/>}
                     {!isDate && <input className="ei7_116_4_99" id="value" placeholder={temp_v} />}
                 </div>
 
