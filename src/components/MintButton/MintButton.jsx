@@ -1,28 +1,30 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import './MintButton.css'
-import { usePrepareContractWrite, useAccount } from 'wagmi'
+import { usePrepareContractWrite } from 'wagmi'
+import nftProjectAbi from '../abi/NFT_project_abi.json';
 
 
 const MintButton = () => {
-    const navigate = useNavigate();
 
-    //確認錢包連接
-    const { address, isConnecting, isDisconnected } = useAccount()
-    if (isConnecting) return <div>Connecting…</div>
-    if (isDisconnected) return <div>Disconnected</div>
+    const navigate = useNavigate();
+    const etherscanApiKey = 'JDQ2V2CCJW51SPZMZ7M81GC6A3EF4R1EGG';
+    const contractAddress = '0x87f89914b59A58E33996D843B18B7e914cC86d4c'; // get from buid(projectForm) or get from old
+
+    const [abi, setAbi] = useState(null);
+    setAbi(nftProjectAbi);
 
     // 使用 usePrepareContractWrite 定義 Mint 函式
     const { write: Mint, status: MintStatus } = usePrepareContractWrite({
-        account: '0xcbe74E481Cc76C949207295235b7dCD6455AFf14',
-        abi: wagmigotchiABI,
+        account: contractAddress,
+        abi: abi,
         functionName: 'Mint',
         })
     
         // 使用 usePrepareContractWrite 定義 Open 函式
         const { write: setAllBlindOpen, status: setAllBlindOpenStatus } = usePrepareContractWrite({
-        account: '0xcbe74E481Cc76C949207295235b7dCD6455AFf14',
-        abi: wagmigotchiABI,
+        account: contractAddress,
+        abi: abi,
         functionName: 'setAllBlindOpen',
         })
 
@@ -49,13 +51,11 @@ const MintButton = () => {
         } catch (error) {
             console.error(error);
         }
+        navigate('/FinalPage')
     }
 
     return (
         <div>
-            {address && <div>Address: {address}</div>}
-            {isConnecting && <div>Connecting…</div>}
-            {isDisconnected && <div>Disconnected</div>}
             <form onSubmit={handlesubmit}>
                 <div className="pos">
                     <textarea required className="formstyle" name="Mintaddress" placeholder="please split address with comma" />
@@ -68,4 +68,4 @@ const MintButton = () => {
     )
 }
 
-export default MintButton;
+export default MintButton
