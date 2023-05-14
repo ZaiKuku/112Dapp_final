@@ -1,5 +1,6 @@
-import './UploadCard.css'
+import './UploadMysteryBox.css'
 import { useState } from "react";
+
 
 export const UploadMysteryBox = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
@@ -8,9 +9,10 @@ export const UploadMysteryBox = (props) => {
     var reader = new FileReader();
     reader.onload = function () {
       setFileSrc(reader.result);
+      
     };
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files); 
+    
     e.target.value = "";
     
   };
