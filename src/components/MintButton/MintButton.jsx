@@ -1,36 +1,33 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import './MintButton.css'
-import { usePrepareContractWrite } from 'wagmi'
-import nftProjectAbi from '../abi/NFT_project_abi.json';
+import { useContractWrite } from 'wagmi'
+import nftProjectAbi from '../../contract_abi/NFT_project_abi.json'
 
 
 const MintButton = () => {
 
     const navigate = useNavigate();
-    const etherscanApiKey = 'JDQ2V2CCJW51SPZMZ7M81GC6A3EF4R1EGG';
     const contractAddress = '0x87f89914b59A58E33996D843B18B7e914cC86d4c'; // get from buid(projectForm) or get from old
 
-    const [abi, setAbi] = useState(null);
-    setAbi(nftProjectAbi);
 
     // 使用 usePrepareContractWrite 定義 Mint 函式
-    const { write: Mint, status: MintStatus } = usePrepareContractWrite({
-        account: contractAddress,
-        abi: abi,
+    const { write: Mint, status: MintStatus } = useContractWrite({
+        address: contractAddress,
+        abi: nftProjectAbi,
         functionName: 'Mint',
         })
     
         // 使用 usePrepareContractWrite 定義 Open 函式
-        const { write: setAllBlindOpen, status: setAllBlindOpenStatus } = usePrepareContractWrite({
-        account: contractAddress,
-        abi: abi,
+        const { write: setAllBlindOpen, status: setAllBlindOpenStatus } = useContractWrite({
+        address: contractAddress,
+        abi: nftProjectAbi,
         functionName: 'setAllBlindOpen',
         })
 
     const handlesubmit = async (e) => {
         e.preventDefault();
-        const formData = e.target.value;
+        const formData = e.target.Mintaddress.value;
         // 分割地址
         const splitaddress = formData.split(',');
         const amount = splitaddress.length;
@@ -41,17 +38,16 @@ const MintButton = () => {
         } catch (error) {
             console.error(error);
         }
-        navigate('/FinalPage')
     }
 
     const handleOpen = async () => {
+        console.log(setAllBlindOpen);
         try {
             await setAllBlindOpen();
             navigate('/FinalPage')
         } catch (error) {
             console.error(error);
         }
-        navigate('/FinalPage')
     }
 
     return (
