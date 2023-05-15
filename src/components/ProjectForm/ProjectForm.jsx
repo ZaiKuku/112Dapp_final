@@ -1,5 +1,6 @@
 import React from "react";
 import './ProjectForm.css'
+import store from "../../States/stores";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {
@@ -38,6 +39,8 @@ const ProjectForm = () => {
         dispatch(updateNumber(data.number));
 
         // 部署智能合約
+        store.getState()
+        
 
         navigate('/Mint')
     }

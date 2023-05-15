@@ -41,7 +41,6 @@ const MintButton = () => {
     }
 
     const handleOpen = async () => {
-        console.log(setAllBlindOpen);
         try {
             await setAllBlindOpen();
             navigate('/FinalPage')

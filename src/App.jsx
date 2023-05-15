@@ -5,22 +5,21 @@ import SettingPage from './pages/SettingPage'
 import MintPage from './pages/MintPage'
 import FinalPage from './pages/FinalPage'
 
-import { createConfig, configureChains, WagmiConfig } from 'wagmi'
+import { createConfig, configureChains, WagmiConfig, useConnect } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { goerli } from 'wagmi/chains'
 
 import { BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom'
 
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
+const { chains, publicClient} = configureChains(
   [goerli],
   [publicProvider()],
 )
- 
+
 const config = createConfig({
   autoConnect: true,
   publicClient,
-  webSocketPublicClient,
 })
 
 const Layout = (props) => {
