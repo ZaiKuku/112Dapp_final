@@ -43,6 +43,7 @@ const ProjectForm = () => {
 
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
+        
 
 
         // 部署智能合約
@@ -131,7 +132,7 @@ const ProjectForm = () => {
                 <select className="selcetTraits" name="displayType" onChange={handleSwitch}>
                     <option>string</option>
                     <option>boost_number</option>
-                    <option>boost percentage</option>
+                    <option>boost_percentage</option>
                     <option>date</option>
                 </select>
                 <div className="traitsType">

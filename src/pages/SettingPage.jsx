@@ -20,8 +20,6 @@ function SettingPage() {
                 <span className='Mystery'>Mystery Box</span>
                 <UploadMysteryBox/>
             </div>
-            
-
         </div>
     )
 }
