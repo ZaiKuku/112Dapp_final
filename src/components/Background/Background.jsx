@@ -11,7 +11,7 @@ function Background() {
             <div className="e3_20"></div>
             <Menu_button/>
             <MetamaskBlock />
-            {/* <div class="e4_48"></div> */}
+            {/* <div className="e4_48"></div> */}
         </div>
     )
 }

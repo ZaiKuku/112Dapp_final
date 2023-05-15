@@ -44,6 +44,9 @@ const ProjectForm = () => {
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
 
+
+        // 部署智能合約
+
         const traitsData = {
             traitsType: formData.get('traitsType'),
             value: formData.get('value'),
@@ -140,7 +143,6 @@ const ProjectForm = () => {
                 </div>
 
             </div>
-
             <div className="build">
                 <button type="submit" className="ei4_110_3_46">Build</button>
             </div>

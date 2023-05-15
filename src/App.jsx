@@ -1,14 +1,27 @@
 import './App.css'
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React ,{ useState, useEffect } from 'react'
 import Startpage from './pages/Startpage'
 import SettingPage from './pages/SettingPage'
 import MintPage from './pages/MintPage'
 import FinalPage from './pages/FinalPage'
 
+import { createConfig, configureChains, WagmiConfig } from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
+import { goerli } from 'wagmi/chains'
 
 import { BrowserRouter as Router, Routes, Route , Link} from 'react-router-dom'
 
+
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [goerli],
+  [publicProvider()],
+)
+ 
+const config = createConfig({
+  autoConnect: true,
+  publicClient,
+  webSocketPublicClient,
+})
 
 const Layout = (props) => {
   return (
@@ -27,22 +40,21 @@ const Layout = (props) => {
 function App() {
 
   return (
-   
-      <Router>
-        <Layout>
-        <Routes>
-            <Route path="/" element={<Startpage/>} />
-            <Route path="/MintSetting" element={<SettingPage/>} />
-            <Route path="/Mint" element={<MintPage/>} />
-            <Route path="/FinalPage" element={<FinalPage/>} />
-            
-        </Routes>
-        </Layout>
-      </Router>
-  
+      <WagmiConfig config={config}>
+        <Router>
+          <Layout>
+          <Routes>
+              <Route path="/" element={<Startpage/>} />
+              <Route path="/MintSetting" element={<SettingPage/>} />
+              <Route path="/Mint" element={<MintPage/>} />
+              <Route path="/FinalPage" element={<FinalPage/>} />
+              
+          </Routes>
+          </Layout>
+        </Router>
+      </WagmiConfig>
 
   )
 }
 
-
-export default App
+export default App;
