@@ -5,6 +5,7 @@ import { useContractWrite } from 'wagmi'
 import nftProjectAbi from '../../contract_abi/NFT_project_abi.json'
 
 
+
 const MintButton = () => {
 
     const navigate = useNavigate();

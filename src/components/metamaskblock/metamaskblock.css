@@ -13,9 +13,28 @@
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    transition-duration: 0.4s;
   }
 
   .METAMASK:hover{
     background-color:#7a6d6db0;
   }
+
+.address{
+  width: 300px;
+  height: 52px;
+  background-color:#7a6d6d63;
+  border:none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+  font-size: 40px;
+  font-family: Inter;
+  color: #ffffff;
+  position: absolute;
+  left: 1200px;
+  top: 40px;
+}
 

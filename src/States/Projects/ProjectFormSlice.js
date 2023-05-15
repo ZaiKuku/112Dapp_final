@@ -6,28 +6,56 @@ const formSlice = createSlice({
   initialState: {
     projectName: '',
     externalLink: '',
-    displayType: '',
-    traitsType: '',
-    value: '',
+    String: {
+      traitsType: '',
+      value: '',
+    },
+
+    boost_number: {
+      traitsType: '',
+      value: '',
+    },
+
+    boost_percentage: {
+      traitsType: '',
+      value: '',
+    },
+
+    date: {
+      traitsType: '',
+      value: '',
+    },
+
     description: '',
     number: '',
   },
   reducers: {
     updateProjectName: (state, action) => {
-      state.projectName = action.payload;
+      state.projectName= action.payload
     },
     updateExternalLink: (state, action) => {
-      state.externalLink = action.payload;
+      state.externalLink = action.payload
     },
-    updateDisplayType: (state, action) => {
-      state.displayType = action.payload;
+    updateString: (state, action) => {
+      state.String.value = action.payload.value
+      state.String.traitsType = action.payload.traitsType
     },
-    updateTraitsType: (state, action) => {
-      state.traitsType = action.payload;
+
+    updateBoostNumber: (state, action) => {
+      state.boost_number.traitsType = action.payload.traitsType
+      state.boost_number.value = action.payload.value
     },
-    updateValue: (state, action) => {
-      state.value = action.payload;
+
+    updateBoostPercentage: (state, action) => {
+      state.boost_percentage.traitsType = action.payload.traitsType
+      state.boost_percentage.value = action.payload.value
     },
+
+    updateDate: (state, action) => {
+      state.date.traitsType = action.payload.traitsType
+      state.date.value = action.payload.value
+    },
+
     updateDescription: (state, action) => {
       state.description = action.payload;
     },
@@ -40,9 +68,10 @@ const formSlice = createSlice({
 export const {
   updateProjectName,
   updateExternalLink,
-  updateDisplayType,
-  updateTraitsType,
-  updateValue,
+  updateString,
+  updateBoostNumber,
+  updateBoostPercentage,
+  updateDate,
   updateDescription,
   updateNumber,
 } = formSlice.actions;

@@ -2,6 +2,7 @@ import Background from '../components/Background/Background'
 import ProjectForm from '../components/ProjectForm/ProjectForm'
 import './SettingPage.css'
 import { UploadCard } from '../components/uploadcomponents/UploadCard'
+import { UploadMysteryBox } from '../components/UploadMysteryBox/UploadMysteryBox'
 
 
 function SettingPage() {
@@ -17,7 +18,7 @@ function SettingPage() {
             <div className="e4_108">
                 <UploadCard/>
                 <span className='Mystery'>Mystery Box</span>
-                <UploadCard/>
+                <UploadMysteryBox/>
             </div>
             
 
