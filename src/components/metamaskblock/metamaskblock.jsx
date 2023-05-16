@@ -4,6 +4,7 @@ import { get_account, select_account } from '../../States/accounts/accountSlice'
 import store from '../../States/stores'
 import { useState } from 'react'
 import { useConnect, useAccount } from 'wagmi'
+import { disconnect } from 'process'
 
 
 
@@ -13,6 +14,9 @@ const MetamaskBlock = () => {
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect()
   const { address, isConnecting, isDisconnected } = useAccount()
+  const handleclick = (connectors) => {
+    connect({ connector: connectors })
+  }
   // const dispatch = useDispatch()
 
   // const [address, setAddress] = useState('')
@@ -58,21 +62,22 @@ const MetamaskBlock = () => {
   // );
   return (
     <div>
-      {isConnecting && connectors.map((connector) => (
-        <button
-          disabled={!connector.ready}
-          key={connector.id}
-          onClick={() => connect({ connector })}
-          className="METAMASK"
-        >
-          {!connector.ready && ' (unsupported)'}
-          {isLoading &&
-            connector.id === pendingConnector?.id &&
-            ' (connecting)'}
+        {isDisconnected && connectors.map((connector) => (
+          <button
+            disabled={!connector.ready}
+            key={connector.id}
+            onClick={() => connect({ connector })}
+            className="METAMASK"
+          >
+            {!connector.ready && ' (unsupported)'}
+            {isLoading &&
+              connector.id === pendingConnector?.id &&
+              ' (connecting)'}
 
-        </button>
-      ))}
-      {!isConnecting && <div className='address'>{address.slice(0, 5)}...{address.slice(address.length-5, address.length-1)}</div>}
+          </button>
+        ))}
+      {(address != null) && <div className='address'>{address.slice(0, 5)}...{address.slice(address.length-5, address.length-1)}</div>} 
+      {/* {(isConnecting) && <div className='address'>{console.log(isConnecting)}</div>} */}
       {error && <div>{error.message}</div>}
     </div>
   )
