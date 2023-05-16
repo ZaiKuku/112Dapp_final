@@ -15,8 +15,9 @@ import {
 import store from "../../States/stores";
 import { useState } from "react";
 
-
-
+//0514new
+import { useContractWrite } from 'wagmi'
+import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
 
 const ProjectForm = () => {
     const navigate = useNavigate();
@@ -47,6 +48,28 @@ const ProjectForm = () => {
 
 
         // 部署智能合約
+        const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
+        const { write: createNFT, status: createNFTStatus } = useContractWrite({
+            address: FactoryAddress,
+            abi: nftFactoryAbi,
+            functionName: 'createNFT',
+            })
+        
+        // 傳參數
+        const handleSubmit = async () => {
+            console.log(createNFT);
+            const maxSupply = updateNumber;
+            const baseURI = 'testURI'; //pinata URI
+            const name_ = updateProjectName;
+            const symbol_ = 'sym';
+            const owner = state.account.account;
+            try {
+                await createNFT(maxSupply, baseURI, name_, symbol_, owner);
+                navigate('/MintPage')
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
         const traitsData = {
             traitsType: formData.get('traitsType'),
