@@ -6,22 +6,22 @@ import nftProjectAbi from '../../contract_abi/NFT_project_abi.json'
 
 
 
-const MintButton = () => {
+const MintButton = ({ newContractAddress }) => {
 
     const navigate = useNavigate();
-    const contractAddress = '0x87f89914b59A58E33996D843B18B7e914cC86d4c'; // get from buid(projectForm) or get from old
+    // const contractAddress = '0x87f89914b59A58E33996D843B18B7e914cC86d4c'; // get from buid(projectForm)
 
 
     // 使用 usePrepareContractWrite 定義 Mint 函式
     const { write: Mint, status: MintStatus } = useContractWrite({
-        address: contractAddress,
+        address: newContractAddress,
         abi: nftProjectAbi,
         functionName: 'Mint',
         })
     
         // 使用 usePrepareContractWrite 定義 Open 函式
         const { write: setAllBlindOpen, status: setAllBlindOpenStatus } = useContractWrite({
-        address: contractAddress,
+        address: newContractAddress,
         abi: nftProjectAbi,
         functionName: 'setAllBlindOpen',
         })
@@ -42,7 +42,6 @@ const MintButton = () => {
     }
 
     const handleOpen = async () => {
-        console.log(setAllBlindOpen);
         try {
             await setAllBlindOpen();
             navigate('/FinalPage')
