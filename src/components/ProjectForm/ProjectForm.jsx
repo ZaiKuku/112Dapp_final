@@ -15,8 +15,9 @@ import {
 } from '../../States/Projects/ProjectFormSlice';
 import { useState } from "react";
 
-
-
+//0514new
+import { useContractWrite } from 'wagmi'
+import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
 
 const ProjectForm = () => {
     const navigate = useNavigate();
@@ -43,11 +44,32 @@ const ProjectForm = () => {
 
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
+        
 
 
         // 部署智能合約
-        store.getState()
+        const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
+        const { write: createNFT, status: createNFTStatus } = useContractWrite({
+            address: FactoryAddress,
+            abi: nftFactoryAbi,
+            functionName: 'createNFT',
+            })
         
+        // 傳參數
+        const handleSubmit = async () => {
+            console.log(createNFT);
+            const maxSupply = updateNumber;
+            const baseURI = 'testURI'; //pinata URI
+            const name_ = updateProjectName;
+            const symbol_ = 'sym';
+            const owner = state.account.account;
+            try {
+                await createNFT(maxSupply, baseURI, name_, symbol_, owner);
+                navigate('/MintPage')
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
         const traitsData = {
             traitsType: formData.get('traitsType'),
@@ -133,7 +155,7 @@ const ProjectForm = () => {
                 <select className="selcetTraits" name="displayType" onChange={handleSwitch}>
                     <option>string</option>
                     <option>boost_number</option>
-                    <option>boost percentage</option>
+                    <option>boost_percentage</option>
                     <option>date</option>
                 </select>
                 <div className="traitsType">

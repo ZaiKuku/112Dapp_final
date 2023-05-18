@@ -26,7 +26,7 @@ const Menu_button = () => {
             <button className='menu' onClick={handleclick}/>
             {clicked && 
                 <menu className='rect_menu'>
-                    <button className='buttons' onClick={go_home}> <span className='fontofbutton'>home</span> </button>
+                    <button className='buttons' onClick={go_home}> <span className='fontofbutton'>Home</span> </button>
                     <button className='buttons' onClick={go_MintSetting}> <span className='fontofbutton'>New Project</span> </button>
                     <button className='buttons' onClick={go_OldProjectPages}><span className='fontofbutton'>History</span></button>
                 </menu>}
