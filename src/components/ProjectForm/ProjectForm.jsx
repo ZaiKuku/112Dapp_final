@@ -16,8 +16,9 @@ import {
 import { useState } from "react";
 
 //0514new
-import { useContractWrite } from 'wagmi'
+import { useContractWrite, useContractEvent } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
+import MintButton from '../MintButton/MintButton'
 
 const ProjectForm = () => {
     const navigate = useNavigate();
@@ -26,7 +27,9 @@ const ProjectForm = () => {
     const [temp_v, setValue] = useState('value');
     const [displayType, setDisplayType] = useState('string');
     const [isDate, setIsDate] = useState(false);
-    const handleSubmit = (e) => {
+    const [newContractAddress, setNewContractAddress] = useState(null);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
@@ -56,20 +59,33 @@ const ProjectForm = () => {
             })
         
         // 傳參數
-        const handleSubmit = async () => {
-            console.log(createNFT);
-            const maxSupply = updateNumber;
-            const baseURI = 'testURI'; //pinata URI
-            const name_ = updateProjectName;
-            const symbol_ = 'sym';
-            const owner = state.account.account;
-            try {
-                await createNFT(maxSupply, baseURI, name_, symbol_, owner);
-                navigate('/MintPage')
-            } catch (error) {
-                console.error(error);
-            }
+        const maxSupply = data.number;
+        const baseURI = 'testURI'; //pinata URI
+        const name_ = data.projectName;
+        const symbol_ = 'sym';
+        const owner = state.account;
+        try {
+            await createNFT(maxSupply, baseURI, name_, symbol_, owner);
+            navigate('/MintPage')
+        } catch (error) {
+            console.error(error);
         }
+
+        // 使用 useContractEvent 監聽 NFTCreated 事件
+        const { events: nftCreatedEvents } = useContractEvent({
+            address: FactoryAddress,
+            abi: nftFactoryAbi,
+            event: 'NFTCreated',
+        });
+
+        useEffect(() => {
+            if (nftCreatedEvents && nftCreatedEvents.length > 0) {
+            // 獲取新合约地址
+            const newContractAddress = nftCreatedEvents[nftCreatedEvents.length - 1].returnValues.nft;
+            setNewContractAddress(newContractAddress);
+            console.log('New contract address:', newContractAddress);
+            }
+        }, [nftCreatedEvents]);
 
         const traitsData = {
             traitsType: formData.get('traitsType'),
@@ -169,6 +185,7 @@ const ProjectForm = () => {
             </div>
             <div className="build">
                 <button type="submit" className="ei4_110_3_46">Build</button>
+                <MintButton newContractAddress={newContractAddress} />
             </div>
         </form>
     )
