@@ -62,7 +62,7 @@ const ProjectForm = () => {
         const maxSupply = data.number;
         const baseURI = 'testURI'; //pinata URI
         const name_ = data.projectName;
-        const symbol_ = 'sym';
+        const symbol_ = 'symbol';
         const owner = state.account;
         try {
             await createNFT(maxSupply, baseURI, name_, symbol_, owner);
