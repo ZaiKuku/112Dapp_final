@@ -110,6 +110,30 @@ const ProjectForm = () => {
         navigate('/Mint')
         console.log(typeof store.getState().projectform);
         console.log(store.getState());
+
+
+        //////////////////////////////////////
+        var obj ={}
+        obj = store.getState().projectform;
+        //console.log(obj);
+
+        fetch('http://localhost:3000/backend', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+          })
+            .then(response => response.json())
+            .then(data => {
+              // 处理服务器响应
+              console.log('收到的資料室:');
+              console.log(data);
+            })
+            .catch(error => {
+              console.error('发生错误:', error);
+            });
+        /////////////////////////////////////
     }
 
     const handleSwitch = (e) => {
