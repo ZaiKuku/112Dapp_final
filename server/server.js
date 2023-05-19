@@ -1,4 +1,4 @@
-// 伺服器端代碼
+// 服务器端代码
 import express from 'express';
 import cors from 'cors'
 import multer from 'multer'
@@ -277,6 +277,6 @@ app.post('/mystery', upload.single('image'), (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`服務器運行在 http://localhost:${port}`);
+  console.log(`服务器运行在 http://localhost:${port}`);
 });
 

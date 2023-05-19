@@ -2,11 +2,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import accountReducer from './accounts/accountSlice'
 import formReducer from './Projects/ProjectFormSlice'
+import URIReducer from './returns/baseURISlice'
+import ContractReducer from './returns/NFTcontractSlice'
 
 const store = configureStore({
   reducer: {
     account: accountReducer,
-    projectform : formReducer
+    projectform: formReducer,
+    baseURI: URIReducer,
+    newContractAddress: ContractReducer
   }
 })
 
