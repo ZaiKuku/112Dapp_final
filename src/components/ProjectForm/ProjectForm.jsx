@@ -17,12 +17,13 @@ import { updateNFTContractName } from "../../States/returns/NFTcontractSlice";
 
 import store from "../../States/stores";
 import { useState, useEffect } from "react";
-import { useContractWrite, useAccount, useContractRead } from 'wagmi'
+import { useContractWrite, useAccount, useContractRead, usePrepareContractWrite } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
 
 
 
 const ProjectForm = () => {
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [temp_T, setTraitsType] = useState('Traits_Type');
@@ -30,19 +31,44 @@ const ProjectForm = () => {
     const [displayType, setDisplayType] = useState('string');
     const [isDate, setIsDate] = useState(false);
     const [newContractAddress, setNewContractAddress] = useState(null);
-    const { address } = useAccount()
+    const {address} = useAccount()
+    console.log(address)
+    const [maxSupply, setMaxSupply] = useState(0);
+    const [baseURI_, setBaseURI_] = useState('baseURI_');
+    const [name_, setName_] = useState('name_');
+    const [symbol_, setSymbol_] = useState('symbol_');
+    const [owner, setOwner] = useState("owner");
 
     const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
 
     // 部署智能合約
-    const { write: createNFT, status: createNFTStatus, isSuccess} = useContractWrite({
+    // const { write: createNFT, status: createNFTStatus, isSuccess} = useContractWrite({
+    //     address: FactoryAddress,
+    //     abi: nftFactoryAbi,
+    //     functionName: 'createNFT',
+    // })
+    const {config} = usePrepareContractWrite({
         address: FactoryAddress,
         abi: nftFactoryAbi,
         functionName: 'createNFT',
+        args: [parseInt(maxSupply), baseURI_, name_, symbol_, address],
+        enabled: true,
     })
-
-    const handleSubmit = async (e) => {
+    console.log(config)
+    const { write: createNFT } = useContractWrite(config);
+   
+    const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Test
+        const maxSupply= 6;
+        const name_ = 'CZ';
+        const symbol_ = 'symbol';
+        const owner = '0xdA048C2845E7696cEB805FAF116F036a046A73f1';
+        const baseURI_ = "ipfs://QmdBLr725XsnGuhFQ5TZMGxcNsDjXmYTn3UvNJXw5L2Hqm/";
+        
+
+
 
         const formData = new FormData(e.target);
         const data = {
@@ -123,46 +149,66 @@ const ProjectForm = () => {
                 console.log(data3);
                 baseURI = data3;
                 //setFileSrc(data3.fileUrl);
-            } catch (error) {
+            
+            } 
+            catch (error) {
                 console.error('发生错误:', error);
             }
         }
 
-        fetchData();
+        fetchData()
+
+
+
+        .then(result =>{
+            // 傳參數，在這上面fetch
+            // maxSupply= parseInt(store.getState().projectform.number);
+            // name_ = store.getState().projectform.name;
+            // symbol_ = 'symbol';
+            // owner = address;
+            // baseURI_ = baseURI;
+            // maxSupply= setMaxSupply(parseInt(store.getState().projectform.number));
+            // const name_ = setName_(store.getState().projectform.name);
+            // const symbol_ = setSymbol_('symbol');
+            // const owner = setOwner(address);
+            // const baseURI_ = setBaseURI_(baseURI);
+            console.log(1)
+            console.log(maxSupply)
+            console.log(baseURI_)
+            console.log(owner)
+            try {
+                createNFT(maxSupply, baseURI_, name_, symbol_, owner);    
+                console.log('hello')
+                console.log(owner);
+            } catch (error) {
+                console.error(error);
+            }
+            // 確認合約部署成功，讀取新合約地址
+            
+            // useEffect(() => {
+                // const { data, status} = useContractRead({
+                //     address: FactoryAddress,
+                //     abi: nftFactoryAbi,
+                //     functionName: 'getNFTInfos',
+                //     args: address //owner
+                // })
+                // const NFTInfo = data.result;
+                // newContractAddress = setNewContractAddress(NFTInfo[-2]);
+                // dispatch(updateNFTContractName(newContractAddress));
+                // },[isSuccess])
+            
+
+            navigate('/Mint')
+        });
+
 
         /////////////////////////////////////////////////////////////////////////////////////////
 
-        // 傳參數，在這上面fetch
-        const maxSupply = store.getState().projectform.number;
-        const name_ = store.getState().projectform.name;
-        const symbol_ = 'symbol';
-        const owner = address;
-        const baseURI_ = baseURI;
-        try {
-            createNFT(maxSupply, baseURI_, name_, symbol_, owner);
-            navigate('/Mint')
-        } catch (error) {
-            console.error(error);
-        }
-        // 確認合約部署成功，讀取新合約地址
-        useEffect(() => {
-            const { data, status} = useContractRead({
-                address: FactoryAddress,
-                abi: nftFactoryAbi,
-                functionName: 'getNFTInfos',
-                args: address //owner
-            })
-            const NFTInfo = data.result;
-            newContractAddress = setNewContractAddress(NFTInfo[-2]);
-            dispatch(updateNFTContractName(newContractAddress));
-            },[isSuccess])
-        navigate('/Mint')
         // console.log(typeof store.getState().projectform);
         console.log(store.getState());
     }
 
     
-
 
     const handleSwitch = (e) => {
         var tt = document.getElementById("traitsType").value;
