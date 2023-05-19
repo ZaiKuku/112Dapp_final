@@ -11,8 +11,12 @@ import {
     updateDate,
     updateDescription,
     updateNumber,
-    updateNFTContractName,
+
 } from '../../States/Projects/ProjectFormSlice';
+
+import { updateNFTContractName } from "../../States/returns/NFTcontractSlice";
+
+import store from "../../States/stores";
 import { useState } from "react";
 import { useContractWrite, useContractEvent, useAccount } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
