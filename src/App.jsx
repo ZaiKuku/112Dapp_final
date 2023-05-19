@@ -41,7 +41,7 @@ function App() {
   return (
       <WagmiConfig config={config}>
         <Router>
-          <Layout>
+ 
           <Routes>
               <Route path="/" element={<Startpage/>} />
               <Route path="/MintSetting" element={<SettingPage/>} />
@@ -49,7 +49,7 @@ function App() {
               <Route path="/FinalPage" element={<FinalPage/>} />
               
           </Routes>
-          </Layout>
+ 
         </Router>
       </WagmiConfig>
 

@@ -1,6 +1,5 @@
 import React from "react";
 import './ProjectForm.css'
-import store from "../../States/stores";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {
@@ -12,13 +11,13 @@ import {
     updateDate,
     updateDescription,
     updateNumber,
+    updateNFTContractName,
 } from '../../States/Projects/ProjectFormSlice';
-import { updateNFTContractName } from '../../States/returns/NFTcontractSlice';
 import { useState } from "react";
-
-//0514new
 import { useContractWrite, useContractEvent, useAccount } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
+
+
 
 const ProjectForm = () => {
     const navigate = useNavigate();
@@ -37,7 +36,7 @@ const ProjectForm = () => {
         address: FactoryAddress,
         abi: nftFactoryAbi,
         functionName: 'createNFT',
-        })
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,7 +46,7 @@ const ProjectForm = () => {
             projectName: formData.get('projectName'),
             externalLink: formData.get('externalLink'),
             displayType: formData.get('displayType'),
-            
+
             description: formData.get('description'),
             number: formData.get('number of NFT'),
         };
@@ -57,38 +56,41 @@ const ProjectForm = () => {
 
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
-        
-        
-        // 傳參數
+
+
+        // 傳參數，在這上面fetch
         const maxSupply = data.number;
-        const baseURI_ = store.getStore().baseURI; // baseURI
         const name_ = data.projectName;
         const symbol_ = 'symbol';
         const owner = address;
-        try {
-            await createNFT(maxSupply, baseURI_, name_, symbol_, owner);
-            navigate('/Mint')
-        } catch (error) {
-            console.error(error);
-        }
+        const baseURI_ = "回傳的baseURI放這裡, 要給他一個變數";
+        /*
+                try {
+                    await createNFT(maxSupply, baseURI_, name_, symbol_, owner);
+                    navigate('/Mint')
+                } catch (error) {
+                    console.error(error);
+                }
         
-        // 使用 useContractEvent 監聽 NFTCreated 事件
-        const { events: nftCreatedEvents } = useContractEvent({
-            address: FactoryAddress,
-            abi: nftFactoryAbi,
-            event: 'NFTCreated',
-        });
+                // 使用 useContractEvent 監聽 NFTCreated 事件
+                const { events: nftCreatedEvents } = useContractEvent({
+                    address: FactoryAddress,
+                    abi: nftFactoryAbi,
+                    event: 'NFTCreated',
+                });
+        
+                useEffect(() => {
+                    if (nftCreatedEvents && nftCreatedEvents.length > 0) {
+                        // 獲取新合约地址
+                        const newContractAddress = nftCreatedEvents[nftCreatedEvents.length - 1].returnValues.nft;
+                        setNewContractAddress(newContractAddress);
+                        dispatch(updateNFTContractName(newContractAddress));
+                        console.log('New contract address:', newContractAddress);
+                    }
+                }, [nftCreatedEvents]);
+        
+        */
 
-        useEffect(() => {
-            if (nftCreatedEvents && nftCreatedEvents.length > 0) {
-            // 獲取新合约地址
-            const newContractAddress = nftCreatedEvents[nftCreatedEvents.length - 1].returnValues.nft;
-            setNewContractAddress(newContractAddress);
-            dispatch(updateNFTContractName(newContractAddress));
-            console.log('New contract address:', newContractAddress);
-            }
-        }, [nftCreatedEvents]);
-        
 
         const traitsData = {
             traitsType: formData.get('traitsType'),
@@ -111,32 +113,8 @@ const ProjectForm = () => {
                 break;
         }
         navigate('/Mint')
-        console.log(typeof store.getState().projectform);
+        // console.log(typeof store.getState().projectform);
         console.log(store.getState());
-
-
-        //////////////////////////////////////
-        var obj ={}
-        obj = store.getState().projectform;
-        //console.log(obj);
-
-        fetch('http://localhost:3000/backend', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-          })
-            .then(response => response.json())
-            .then(data => {
-              // 处理服务器响应
-              console.log('收到的資料室:');
-              console.log(data);
-            })
-            .catch(error => {
-              console.error('发生错误:', error);
-            });
-        /////////////////////////////////////
     }
 
     const handleSwitch = (e) => {
@@ -146,20 +124,20 @@ const ProjectForm = () => {
             traitsType: tt,
             value: v,
         }
-        
+
         // console.log(data);
         switch (displayType) {
             case 'string':
                 dispatch(updateString(data));
-                
+
                 break;
             case 'boost_number':
                 dispatch(updateBoostNumber(data));
-            
+
                 break;
             case 'boost_percentage':
                 dispatch(updateBoostPercentage(data));
-                
+
                 break;
             case 'date':
                 dispatch(updateDate(data));
@@ -174,8 +152,8 @@ const ProjectForm = () => {
             setIsDate(false);
         }
         setDisplayType(e.target.value);
-        
-        
+
+
     }
 
     return (
@@ -192,9 +170,8 @@ const ProjectForm = () => {
                 </div>
 
                 <div className="e5_116">
-                    <input required type = 'number' className="e4_92" name="number of NFT" placeholder="number of NFT" />
+                    <input required type='number' className="e4_92" name="number of NFT" placeholder="number of NFT" />
                 </div>
-
                 <div>
                     <select className="selcetTraits" name="displayType" onChange={handleSwitch}>
                         <option>string</option>
@@ -206,7 +183,7 @@ const ProjectForm = () => {
                         <input className="ei7_116_4_99" id="traitsType" name="traitsType" placeholder={temp_T} />
                     </div>
                     <div className="value">
-                        {isDate && <input className="ei7_116_4_99" id="value" name="value" placeholder={temp_v} type = 'datetime'/>}
+                        {isDate && <input className="ei7_116_4_99" id="value" name="value" placeholder={temp_v} type='datetime' />}
                         {!isDate && <input className="ei7_116_4_99" id="value" placeholder={temp_v} />}
                     </div>
 

@@ -1,37 +1,25 @@
 import './UploadCard.css'
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { updatePicture } from '../../States/pictures/pictureSlice';
+import store from "../../States/stores";
 
 export const UploadCard = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
+  const dispatch = useDispatch();
   const handleUploadFile = (e) => {
-    if (!e.target.files[0]) return;    
+   if (!e.target.files[0]) return;
+    dispatch(updatePicture(e.target.files[0]));
+
     var reader = new FileReader();
+    
     reader.onload = function () {
       setFileSrc(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files); 
-    // e.target.value = "";
-     //////////////////////////////////////////
-     const formData = new FormData();
-     console.log(typeof(e.target.files[0]))
-     formData.append('image', e.target.files[0]);
-     console.log(formData)
-     fetch('http://localhost:3000/nftpicture', {
-       method: 'POST',
-       body: formData,
-     })
-       .then((response) => response.json())
-       .then((data) => {
-         // 在此處處理後端回傳的資料
-         console.log(data);
-         setFileSrc(data.fileUrl);
-       })
-       .catch((error) => {
-         // 處理錯誤
-         console.error('Error:', error);
-       });
-     ////////////////////////////////////////
+    // console.log(e.target.files[0]);
+    
+    e.target.value = "";
   };
   const handleClear = (e) => {
     e.preventDefault();
@@ -41,10 +29,10 @@ export const UploadCard = (props) => {
 
   return (
     <label className="UploadCard" {...props}>
-      
+
       {fileSrc ? (
         <>
-          <button className = "ClearBtn" onClick={handleClear}>刪除</button>
+          <button className="ClearBtn" onClick={handleClear}>刪除</button>
           <div className='UploadPreview'>
             <img className='UploadPreviewImg' src={fileSrc} />
           </div>
@@ -53,7 +41,7 @@ export const UploadCard = (props) => {
         <span className='UploadCardButton'>上傳</span>
       )}
       <input type="file" accept="image/gif, image/jpeg, image/png" className='UploadCardInput' onChange={handleUploadFile} />
-      
+
     </label>
   );
 };
