@@ -1,6 +1,5 @@
 import React from "react";
 import './ProjectForm.css'
-import store from "../../States/stores";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {
@@ -14,11 +13,13 @@ import {
     updateNumber,
     updateNFTContractName,
 } from '../../States/Projects/ProjectFormSlice';
-import { useState } from "react";
 
-//0514new
+import store from "../../States/stores";
+import { useState } from "react";
 import { useContractWrite, useContractEvent, useAccount } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
+
+
 
 const ProjectForm = () => {
     const navigate = useNavigate();
@@ -90,6 +91,8 @@ const ProjectForm = () => {
         }, [nftCreatedEvents]);
         
 
+
+
         const traitsData = {
             traitsType: formData.get('traitsType'),
             value: formData.get('value'),
@@ -111,32 +114,8 @@ const ProjectForm = () => {
                 break;
         }
         navigate('/Mint')
-        console.log(typeof store.getState().projectform);
+        // console.log(typeof store.getState().projectform);
         console.log(store.getState());
-
-
-        //////////////////////////////////////
-        var obj ={}
-        obj = store.getState().projectform;
-        //console.log(obj);
-
-        fetch('http://localhost:3000/backend', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-          })
-            .then(response => response.json())
-            .then(data => {
-              // 处理服务器响应
-              console.log('收到的資料室:');
-              console.log(data);
-            })
-            .catch(error => {
-              console.error('发生错误:', error);
-            });
-        /////////////////////////////////////
     }
 
     const handleSwitch = (e) => {
@@ -194,7 +173,6 @@ const ProjectForm = () => {
                 <div className="e5_116">
                     <input required type = 'number' className="e4_92" name="number of NFT" placeholder="number of NFT" />
                 </div>
-
                 <div>
                     <select className="selcetTraits" name="displayType" onChange={handleSwitch}>
                         <option>string</option>
