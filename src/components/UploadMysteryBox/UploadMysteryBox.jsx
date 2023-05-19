@@ -6,6 +6,30 @@ export const UploadMysteryBox = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
+
+    //////////////////////////////////////////
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+    
+    fetch('http://localhost:3000/mystery', {
+      method: 'POST',
+      body: formData,
+    })
+      // .then((response) => response.json())
+      .then((response) => response.text())  // 將回應轉換為文字
+      .then((data) => {
+        // 在此處處理後端回傳的資料
+        console.log('我收到的最後檔案資料是: ');
+        console.log(data);
+        setFileSrc(data.fileUrl);
+      })
+      .catch((error) => {
+        // 處理錯誤
+        console.error('Error:', error);
+      });
+    ////////////////////////////////////////
+
+    
     var reader = new FileReader();
     reader.onload = function () {
       setFileSrc(reader.result);
