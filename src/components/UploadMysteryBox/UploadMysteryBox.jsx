@@ -19,7 +19,7 @@ export const UploadMysteryBox = (props) => {
       .then((response) => response.text())  // 將回應轉換為文字
       .then((data) => {
         // 在此處處理後端回傳的資料
-        console.log('我收到的最後檔案資料是: ');
+        //console.log('我收到的最後檔案資料是: ');
         console.log(data);
         setFileSrc(data.fileUrl);
       })
