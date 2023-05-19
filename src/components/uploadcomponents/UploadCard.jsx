@@ -1,21 +1,28 @@
 import './UploadCard.css'
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { updatePicture } from '../../States/pictures/pictureSlice';
+import store from "../../States/stores";
 
 export const UploadCard = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
+  const dispatch = useDispatch();
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
+    dispatch(updatePicture(e.target.files[0]));
+
+
     var reader = new FileReader();
     
     reader.onload = function () {
       setFileSrc(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     
     e.target.value = "";
 
-    
+    // console.log(store.getState().picture);
   };
   const handleClear = (e) => {
     e.preventDefault();
