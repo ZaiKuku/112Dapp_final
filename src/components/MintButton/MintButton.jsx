@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom"
 import './MintButton.css'
 import { useContractWrite } from 'wagmi'
 import nftProjectAbi from '../../contract_abi/NFT_project_abi.json'
+import store from "../../States/stores";
 
 
 
 const MintButton = () => {
 
     const navigate = useNavigate();
+    const newContractAddress = store.getStore().newContractAddress;
     // const contractAddress = '0x87f89914b59A58E33996D843B18B7e914cC86d4c'; // get from buid(projectForm)
 
     // 使用 usePrepareContractWrite 定義 Mint 函式

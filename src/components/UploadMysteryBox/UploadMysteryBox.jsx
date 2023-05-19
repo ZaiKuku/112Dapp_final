@@ -1,9 +1,12 @@
 import './UploadMysteryBox.css'
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { updateBaseURIName } from '../../States/returns/baseURISlice';
 
 
 export const UploadMysteryBox = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
+  const dispatch = useDispatch();
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
 
@@ -21,6 +24,7 @@ export const UploadMysteryBox = (props) => {
         // 在此處處理後端回傳的資料
         console.log('我收到的最後檔案資料是: ');
         console.log(data);
+        dispatch(updateBaseURIName(data))
         setFileSrc(data.fileUrl);
       })
       .catch((error) => {

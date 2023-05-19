@@ -12,8 +12,8 @@ import {
     updateDate,
     updateDescription,
     updateNumber,
-    updateNFTContractName,
 } from '../../States/Projects/ProjectFormSlice';
+import { updateNFTContractName } from '../../States/returns/NFTcontractSlice';
 import { useState } from "react";
 
 //0514new
