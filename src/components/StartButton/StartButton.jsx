@@ -23,7 +23,6 @@ const StartButton = () => {
             {!clicked && <button onClick={handleclick} className='start'>Start</button>}
             {clicked && <>
                 <button onClick={handleclick_new} className='start'>New</button>
-                <button onClick={handleclick_old} className='start'>Old</button>
             </>}
         </div>
     );
