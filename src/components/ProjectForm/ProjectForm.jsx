@@ -11,14 +11,13 @@ import {
     updateDate,
     updateDescription,
     updateNumber,
-
 } from '../../States/Projects/ProjectFormSlice';
 
 import { updateNFTContractName } from "../../States/returns/NFTcontractSlice";
 
 import store from "../../States/stores";
-import { useState } from "react";
-import { useContractWrite, useContractEvent, useAccount } from 'wagmi'
+import { useState, useEffect } from "react";
+import { useContractWrite, useAccount, useContractRead } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
 
 
@@ -33,10 +32,10 @@ const ProjectForm = () => {
     const [newContractAddress, setNewContractAddress] = useState(null);
     const { address } = useAccount()
 
+    const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
 
     // 部署智能合約
-    const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
-    const { write: createNFT, status: createNFTStatus } = useContractWrite({
+    const { write: createNFT, status: createNFTStatus, isSuccess} = useContractWrite({
         address: FactoryAddress,
         abi: nftFactoryAbi,
         functionName: 'createNFT',
@@ -62,40 +61,6 @@ const ProjectForm = () => {
         dispatch(updateNumber(data.number));
 
 
-        // 傳參數，在這上面fetch
-        const maxSupply = data.number;
-        const name_ = data.projectName;
-        const symbol_ = 'symbol';
-        const owner = address;
-        const baseURI_ = "回傳的baseURI放這裡, 要給他一個變數";
-        /*
-                try {
-                    await createNFT(maxSupply, baseURI_, name_, symbol_, owner);
-                    navigate('/Mint')
-                } catch (error) {
-                    console.error(error);
-                }
-        
-                // 使用 useContractEvent 監聽 NFTCreated 事件
-                const { events: nftCreatedEvents } = useContractEvent({
-                    address: FactoryAddress,
-                    abi: nftFactoryAbi,
-                    event: 'NFTCreated',
-                });
-        
-                useEffect(() => {
-                    if (nftCreatedEvents && nftCreatedEvents.length > 0) {
-                        // 獲取新合约地址
-                        const newContractAddress = nftCreatedEvents[nftCreatedEvents.length - 1].returnValues.nft;
-                        setNewContractAddress(newContractAddress);
-                        dispatch(updateNFTContractName(newContractAddress));
-                        console.log('New contract address:', newContractAddress);
-                    }
-                }, [nftCreatedEvents]);
-        
-        */
-
-
         const traitsData = {
             traitsType: formData.get('traitsType'),
             value: formData.get('value'),
@@ -116,10 +81,88 @@ const ProjectForm = () => {
             default:
                 break;
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////
+        var baseURI = "";
+        async function fetchData() {
+            try {
+                var obj = store.getState().projectform;
+
+                const response1 = await fetch('http://localhost:3000/backend', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                });
+                const data1 = await response1.json();
+                console.log('收到的資料室:');
+                console.log(data1);
+
+                const formData_pic = new FormData();
+                formData_pic.append('image', store.getState().picture.picture, store.getState().picture.picture.name);
+
+                const response2 = await fetch('http://localhost:3000/nftpicture', {
+                    method: 'POST',
+                    body: formData_pic
+                });
+                const data2 = await response2.json();
+                console.log('.....heeheheehe');
+                console.log(data2);
+                //setFileSrc(data2.fileUrl);
+
+                const formData_mystery = new FormData();
+                formData_mystery.append('image', store.getState().MysteryBox.MysteryBox, store.getState().MysteryBox.MysteryBox.name);
+
+                const response3 = await fetch('http://localhost:3000/mystery', {
+                    method: 'POST',
+                    body: formData_mystery
+                });
+                const data3 = await response3.text();
+                console.log('我收到的最後檔案資料是:');
+                console.log(data3);
+                baseURI = data3;
+                //setFileSrc(data3.fileUrl);
+            } catch (error) {
+                console.error('发生错误:', error);
+            }
+        }
+
+        fetchData();
+
+        /////////////////////////////////////////////////////////////////////////////////////////
+
+        // 傳參數，在這上面fetch
+        const maxSupply = store.getState().projectform.number;
+        const name_ = store.getState().projectform.name;
+        const symbol_ = 'symbol';
+        const owner = address;
+        const baseURI_ = baseURI;
+        try {
+            createNFT(maxSupply, baseURI_, name_, symbol_, owner);
+            navigate('/Mint')
+        } catch (error) {
+            console.error(error);
+        }
+        // 確認合約部署成功，讀取新合約地址
+        useEffect(() => {
+            const { data, status} = useContractRead({
+                address: FactoryAddress,
+                abi: nftFactoryAbi,
+                functionName: 'getNFTInfos',
+                args: address //owner
+            })
+            const NFTInfo = data.result;
+            newContractAddress = setNewContractAddress(NFTInfo[-2]);
+            dispatch(updateNFTContractName(newContractAddress));
+            },[isSuccess])
         navigate('/Mint')
         // console.log(typeof store.getState().projectform);
         console.log(store.getState());
     }
+
+    
+
 
     const handleSwitch = (e) => {
         var tt = document.getElementById("traitsType").value;
@@ -149,6 +192,7 @@ const ProjectForm = () => {
             default:
                 break;
         }
+        
         if (e.target.value == 'date') {
             setIsDate(true);
         }
