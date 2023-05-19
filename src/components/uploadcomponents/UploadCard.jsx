@@ -6,12 +6,15 @@ export const UploadCard = (props) => {
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
     var reader = new FileReader();
+    
     reader.onload = function () {
       setFileSrc(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files); 
+    console.log(e.target.files[0]);
+    
     e.target.value = "";
+
     
   };
   const handleClear = (e) => {
@@ -21,10 +24,10 @@ export const UploadCard = (props) => {
 
   return (
     <label className="UploadCard" {...props}>
-      
+
       {fileSrc ? (
         <>
-          <button className = "ClearBtn" onClick={handleClear}>刪除</button>
+          <button className="ClearBtn" onClick={handleClear}>刪除</button>
           <div className='UploadPreview'>
             <img className='UploadPreviewImg' src={fileSrc} />
           </div>
@@ -33,7 +36,7 @@ export const UploadCard = (props) => {
         <span className='UploadCardButton'>上傳</span>
       )}
       <input type="file" accept="image/gif, image/jpeg, image/png" className='UploadCardInput' onChange={handleUploadFile} />
-      
+
     </label>
   );
 };
