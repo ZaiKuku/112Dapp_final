@@ -67,3 +67,4 @@ export const UploadMysteryBox = (props) => {
     </label>
   );
 };
+export default UploadMysteryBox;

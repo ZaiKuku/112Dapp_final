@@ -8,9 +8,8 @@ export const UploadCard = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
   const dispatch = useDispatch();
   const handleUploadFile = (e) => {
-    if (!e.target.files[0]) return;
+   if (!e.target.files[0]) return;
     dispatch(updatePicture(e.target.files[0]));
-
 
     var reader = new FileReader();
     
@@ -21,13 +20,12 @@ export const UploadCard = (props) => {
     // console.log(e.target.files[0]);
     
     e.target.value = "";
-
-    // console.log(store.getState().picture);
   };
   const handleClear = (e) => {
     e.preventDefault();
     setFileSrc(null);
   };
+
 
   return (
     <label className="UploadCard" {...props}>
