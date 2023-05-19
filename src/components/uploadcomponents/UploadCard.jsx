@@ -5,6 +5,25 @@ export const UploadCard = (props) => {
   const [fileSrc, setFileSrc] = useState(null);
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
+     //////////////////////////////////////////
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+    
+    fetch('http://localhost:3000/nftpicture', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // 在此處處理後端回傳的資料
+        console.log(data);
+        setFileSrc(data.fileUrl);
+      })
+      .catch((error) => {
+        // 處理錯誤
+        console.error('Error:', error);
+      });
+    ////////////////////////////////////////
     var reader = new FileReader();
     reader.onload = function () {
       setFileSrc(reader.result);
@@ -18,6 +37,7 @@ export const UploadCard = (props) => {
     e.preventDefault();
     setFileSrc(null);
   };
+
 
   return (
     <label className="UploadCard" {...props}>

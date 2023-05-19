@@ -2,7 +2,7 @@ import './UploadMysteryBox.css'
 import { useState } from "react";
 
 
-export const UploadMysteryBox = (props) => {
+export const UploadMysteryBox = ({onDataChange, ...props}) => {
   const [fileSrc, setFileSrc] = useState(null);
   const handleUploadFile = (e) => {
     if (!e.target.files[0]) return;
@@ -21,6 +21,7 @@ export const UploadMysteryBox = (props) => {
         // 在此處處理後端回傳的資料
         console.log('我收到的最後檔案資料是: ');
         console.log(data);
+        onDataChange(data);
         setFileSrc(data.fileUrl);
       })
       .catch((error) => {
@@ -42,6 +43,7 @@ export const UploadMysteryBox = (props) => {
   const handleClear = (e) => {
     e.preventDefault();
     setFileSrc(null);
+    onDataChange(null);
   };
 
   return (
@@ -62,3 +64,4 @@ export const UploadMysteryBox = (props) => {
     </label>
   );
 };
+export default UploadMysteryBox;

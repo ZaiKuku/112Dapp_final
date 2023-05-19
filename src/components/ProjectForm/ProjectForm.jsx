@@ -19,6 +19,7 @@ import { useState } from "react";
 import { useContractWrite, useContractEvent } from 'wagmi'
 import nftFactoryAbi from '../../contract_abi/NFTFactory_abi.json'
 import MintButton from '../MintButton/MintButton'
+import UploadMysteryBox from '../UploadMysteryBox/UploadMysteryBox';
 
 const ProjectForm = () => {
     const navigate = useNavigate();
@@ -28,6 +29,19 @@ const ProjectForm = () => {
     const [displayType, setDisplayType] = useState('string');
     const [isDate, setIsDate] = useState(false);
     const [newContractAddress, setNewContractAddress] = useState(null);
+    const [baseURI, setBaseURI] = useState('');
+
+    const handleDataChange = (data) => {
+        setBaseURI(data); // Update the baseURI state when data changes in UploadMysteryBox
+    };
+
+    // 部署智能合約
+    const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
+    const { write: createNFT, status: createNFTStatus } = useContractWrite({
+        address: FactoryAddress,
+        abi: nftFactoryAbi,
+        functionName: 'createNFT',
+        })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,25 +62,16 @@ const ProjectForm = () => {
         dispatch(updateDescription(data.description));
         dispatch(updateNumber(data.number));
         
-
-
-        // 部署智能合約
-        const FactoryAddress = '0x33Be5CF29A5827A64A10AC4e414b97A4f2b431b7'; //NFT Factory地址
-        const { write: createNFT, status: createNFTStatus } = useContractWrite({
-            address: FactoryAddress,
-            abi: nftFactoryAbi,
-            functionName: 'createNFT',
-            })
         
         // 傳參數
         const maxSupply = data.number;
-        const baseURI = 'testURI'; //pinata URI
+        const baseURI_ = baseURI; // baseURI
         const name_ = data.projectName;
         const symbol_ = 'symbol';
-        const owner = state.account;
+        const owner = store.account;
         try {
-            await createNFT(maxSupply, baseURI, name_, symbol_, owner);
-            navigate('/MintPage')
+            await createNFT(maxSupply, baseURI_, name_, symbol_, owner);
+            navigate('/Mint')
         } catch (error) {
             console.error(error);
         }
@@ -208,6 +213,9 @@ const ProjectForm = () => {
 
             </div>
             <div className="build">
+                <div style={{ display: 'none' }}>
+                    <UploadMysteryBox onDataChange={handleDataChange} />
+                </div>
                 <button type="submit" className="ei4_110_3_46">Build</button>
                 <MintButton newContractAddress={newContractAddress} />
             </div>
