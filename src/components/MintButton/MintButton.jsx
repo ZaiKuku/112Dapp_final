@@ -6,11 +6,10 @@ import nftProjectAbi from '../../contract_abi/NFT_project_abi.json'
 
 
 
-const MintButton = ({ newContractAddress }) => {
+const MintButton = () => {
 
     const navigate = useNavigate();
     // const contractAddress = '0x87f89914b59A58E33996D843B18B7e914cC86d4c'; // get from buid(projectForm)
-
 
     // 使用 usePrepareContractWrite 定義 Mint 函式
     const { write: Mint, status: MintStatus } = useContractWrite({
